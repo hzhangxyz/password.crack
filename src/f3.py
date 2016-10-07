@@ -13,27 +13,23 @@ dict_slices = map(int,dict_slice.split(":"))
 
 if hash_type[0] == "m":
     hash_id     = 500
-    hash_length = 35
 else:
     hash_id     = 3200
-    hash_length = 61
-
-hash_position = [i*hash_length for i in hash_slices]
-dict_position = [i*dict_legnth for i in dict_slices]
 
 this_hash = "this.hash"
 this_dict = "this.dict"
 
 hash_file_point = open(hash_file,"r")
 dict_file_point = open(dict_file,"r")
-hash_file_point.seek(hash_position[0])
-dict_file_point.seek(dict_position[0])
 
 this_hash_point = open(this_hash,"w")
 this_dict_point = open(this_dict,"w")
 
-this_hash_point.write(hash_file_point.read(hash_position[1]-hash_position[0]))
-this_dict_point.write(dict_file_point.read(dict_position[1]-dict_position[0]))
+for i in range(hash_slices[0]):hash_file_point.readline()
+for i in range(dict_slices[0]):dict_file_point.readline()
+
+for i in range(hash_slices[1]-hash_slices[0]):this_hash_point.write(hash_file_point.readline())
+for i in range(dict_slices[1]-dict_slices[0]):this_dict_point.write(dict_file_point.readline())
 
 hash_file_point.close()
 dict_file_point.close()
