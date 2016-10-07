@@ -13,16 +13,16 @@ int split_md5_and_bcrypt(char *file_name){
     FILE *md5_cracked    = fopen(md5_cracked_file,"w");
     FILE *bcrypt_cracked = fopen(bcrypt_cracked_file,"w");
     char hash[80];
-    while(fgets(hash,80,fp)){
+    while(fscanf(fp,"%s",hash)!=-1){
         int length = strlen(hash);
         if(length > 25)
             if(hash[1]!='2'){
-                fprintf(md5,"%s",hash);
-                fprintf(md5_cracked,"%s\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",hash);
+                fprintf(md5,"%s\n",hash);
+                fprintf(md5_cracked,"%s:::::::::::::::::::::::::::::::::::::\n",hash);
             }
             else{
-                fprintf(bcrypt,"%s",hash);
-                fprintf(bcrypt_cracked,"%s\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",hash);
+                fprintf(bcrypt,"%s\n",hash);
+                fprintf(bcrypt_cracked,"%s:::::::::::::::::::::::::::::::::::::\n",hash);
             }
     }
     fclose(fp);
