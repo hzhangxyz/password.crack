@@ -13,10 +13,10 @@ is_lock = re.compile("^l:\d+:\d+:\d+:\d+$").match
 get_min = lambda x:int(x.split(":")[1])
 
 def init():
-    data = os.listdir("pool")
+    data = filter(is_file,os.listdir("pool"))
     data.sort(key=get_min)
-    for i in data[:lock_num]:
-        os.rename("pool/%s"i,"pool/l%s"i[1:])
+    for i in data[:int(lock_num)]:
+        os.rename("pool/%s"%i,"pool/l%s"%i[1:])
 
 def query_one():
     data = os.listdir("pool")
@@ -33,7 +33,7 @@ def application(environ, start_response):
     if query == "query":
         return query_one()
     else:
-        os.rename("pool/p%s"%query[1:],"pool/%s"query)
+        os.rename("pool/p%s"%query[1:],"pool/%s"%query)
         return ""
 
 init()
