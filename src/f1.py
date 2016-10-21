@@ -6,9 +6,9 @@ import re
 port_num = sys.argv[1]
 lock_num = sys.argv[2]
 
-is_file = re.compile("^[tlpcb]:\d+:\d+:\d+:\d+$").match
-is_tocr = re.compile("^t:\d+:\d+:\d+:\d+$").match
-is_lock = re.compile("^l:\d+:\d+:\d+:\d+$").match
+is_file = re.compile("^[tlpcb]:\d+:\d+:\d+$").match
+is_tocr = re.compile("^t:\d+:\d+:\d+$").match
+is_lock = re.compile("^l:\d+:\d+:\d+$").match
 
 get_min = lambda x:int(x.split(":")[1])
 
@@ -29,6 +29,7 @@ def query_one():
     return ltop
 
 def application(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
     query = environ["QUERY_STRING"]
     if query == "query":
         return query_one()
