@@ -21,20 +21,20 @@ export HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
 ```
 # server start
 ```
-./initial $HASH
-python scatter.py m &
-python scatter.py b &
-python gather.py m &
-python gather.py b &
+./initial
+./scatter.py m &
+./scatter.py b &
+./gather.py m &
+./gather.py b &
 ```
 # server end
 ```
-python arrange.py $HASH $HASH.md5.cracked $HASH.bcr.cracked $ANSFILE
+./finish
 ```
 # run a client(need a while)
 ```
-python client.py m
-python client.py b
+./client.py m
+./client.py b
 ```
 # dictionary format
 `status:order:start:end`
