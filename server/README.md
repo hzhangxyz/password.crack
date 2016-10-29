@@ -1,18 +1,18 @@
 # ENV
 ```
-SERVERDIR=/public/password.crack/crack/SERVERDIR
-HASH=$SERVERDIR/input.test
-MD5POOL=$SERVERDIR/md5_pool
-BCRPOOL=$SERVERDIR/bcr_pool
-MD5SCATTER=2222
-MD5GATHER=2223
-BCRSCATTER=2224
-BCRGATHER=2225
-LOCKEDNUM=2
-ANSFILE=$SERVERDIR/output
-PASSWDSERVER=node1
-HASHCATADDR=/public/password.crack/hashcat/hashcat
-HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
+export SERVERDIR=/public/password.crack/crack/server
+export HASH=$SERVERDIR/input.test
+export MD5POOL=$SERVERDIR/md5_pool
+export BCRPOOL=$SERVERDIR/bcr_pool
+export MD5SCATTER=2222
+export MD5GATHER=2223
+export BCRSCATTER=2224
+export BCRGATHER=2225
+export LOCKEDNUM=2
+export ANSFILE=$SERVERDIR/output
+export PASSWDSERVER=node1
+export HASHCATADDR=/public/password.crack/hashcat/hashcat
+export HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
 ```
 # SERVERDIR start
 ```
