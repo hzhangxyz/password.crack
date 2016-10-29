@@ -6,6 +6,7 @@ import re
 port_num = sys.argv[1]
 lock_num = sys.argv[2]
 fold_nam = sys.argv[3]
+hash_fil = sys.argv[4]
 
 is_file = re.compile("^[tlpcb]:\d+:\d+:\d+$").match
 is_tocr = re.compile("^t:\d+:\d+:\d+$").match
@@ -33,7 +34,7 @@ def application(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/plain')])
     query = environ["QUERY_STRING"]
     if query == "query":
-        return query_one()
+        return "%s:%s"%(hash_fil,query_one())
     else:
         os.rename("%s/p%s"%(fold_nam,query[1:]),"%s/%s"%(fold_nam,query))
         return ""
