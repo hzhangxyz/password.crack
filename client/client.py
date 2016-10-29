@@ -1,14 +1,33 @@
 #!usr/bin/env python
 import sys
 import os
-import subprocess
+import urllib
+import shutil
 
-data       = subprocess.check_output('curl "127.0.0.1:2435/?query"',shell=True)
+tmp=os.system
+def oss(n):
+    print n
+    tmp(n)
+os.system=oss
+
 hash_type  = sys.argv[1] # "m" or "b"
-work_dir   = sys.argv[2]
+dict_dir   = sys.argv[2]
 ans_file   = sys.argv[3]
-hash_file  = data[:data.find(":")]
-dict_file  = data[1+data.find(":"):]
+scatter    = sys.argv[4]
+gather     = sys.argv[5]
+server     = sys.argv[6]
+hashcat    = sys.argv[7]
+
+def urlget(n):
+    c = urllib.urlopen(n)
+    d = c.readline()
+    c.close()
+    return d
+
+query      = urlget("http://%s:%s/?query"%(server,scatter))
+
+hash_file  = query[:query.find(":")]
+dict_file  = query[1+query.find(":"):]
 hash_slice = dict_file[1+dict_file.find(":",1+dict_file.find(":")):]
 
 hash_slices = map(int,hash_slice.split(":"))
@@ -26,37 +45,28 @@ hash_ans_l = hash_length + dict_length + 1
 
 this_hash = "this.hash"
 this_dict = "this.dict"
+this_pot  = "this.pot"
 
 ans_file_point  = open(ans_file,"r")
 hash_file_point = open(hash_file,"r")
 this_hash_point = open(this_hash,"w")
 
-hash_file_point.seek(hash_slices[0]*(hash_length+1))
+hash_file_point.seek(hash_slices[0]*(1+hash_length))
+ans_file_point.seek(hash_slices[0]*(1+hash_ans_l)+hash_length+1)
 
-ans_file_point.seek((1+hash_ans_l)*hash_slices[0]+hash_length+1)
 for i in range(hash_slices[1]-hash_slices[0]):
     to_write = hash_file_point.readline()
     if ans_file_point.read(1)==":":
         this_hash_point.write(to_write)
     ans_file_point.seek(hash_ans_l,1)
 
+ans_file_point.close()
 hash_file_point.close()
 this_hash_point.close()
 
-tmp=os.system
+shutil.copyfile(os.path.join(dict_dir,"p%s"%dict_file[1:]),this_dict)
 
-def oss(n):
-    print n
-    tmp(n)
+os.system("%s -w 4 -a 0 -m %d --potfile-path %s %s %s"%(hashcat,hash_id,this_pot,this_hash,this_dict))
 
-os.system=oss
-
-os.system("cp %s this.dict"%os.path.join(work_dir,"p%s"%dict_file[1:]))
-
-to_run = "./hashcat -a 0 -m %d %s %s"%(hash_id,this_hash,this_dict)
-
-os.system(to_run)
-
-os.system('curl "127.0.0.1:2435/?c%s"'%dict_file[1:])
-os.system('curl "127.0.0.1:5342/?%s/this.pot:%s"'%(os.path.abspath(os.curdir),hash_slice))
-
+urlget("%s:%s/?c%s"%(server,scatter,dict_file[1:]))
+urlget("%s:%s/?%s:%s"%(server,gather,os.path.abspath(os.curdir),hash_slice))
