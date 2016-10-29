@@ -36,3 +36,10 @@ python arrange.py $HASH $HASH.md5.cracked $HASH.bcrypt.cracked $ANSFILE
 python client.py m
 python client.py b
 ```
+# dictionary format
+`status:order:start:end`
+- t:to crack
+- l:lock to change
+- p:crack pending
+- c:completed
+- b:crack break
