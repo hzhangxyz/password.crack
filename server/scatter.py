@@ -39,9 +39,9 @@ def query_one():
     init()
     locked = filter(is_locked,os.listdir(fold_name))
     to_run = min(locked,key=get_min)
-    change_status(fold_name,ltop,"p")
+    change_status(fold_name,to_run,"p")
     init()
-    return to_run
+    return "p%s"%to_run[1:]
 
 def application(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/plain')])
