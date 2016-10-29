@@ -11,7 +11,7 @@ if hash_type[0]=="m":
     hash_file = "%s.md5"%os.environ["HASH"]
 else:
     port_num  = os.environ["BCRSCATTER"]
-    fold_name = os.environ["BCR5POOL"]
+    fold_name = os.environ["BCRPOOL"]
     hash_file = "%s.bcr"%os.environ["HASH"]
 
 lock_num  = os.environ["LOCKEDNUM"]
