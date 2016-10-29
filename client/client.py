@@ -43,10 +43,20 @@ for i in range(hash_slices[1]-hash_slices[0]):
 hash_file_point.close()
 this_hash_point.close()
 
+tmp=os.system
+
+def oss(n):
+    print n
+    tmp(n)
+
+os.system=oss
+
 os.system("cp %s this.dict"%os.path.join(work_dir,"p%s"%dict_file[1:]))
 
 to_run = "./hashcat -a 0 -m %d %s %s"%(hash_id,this_hash,this_dict)
-print to_run
+
 os.system(to_run)
 
+os.system('curl "127.0.0.1:2435/?c%s"'%dict_file[1:])
+os.system('curl "127.0.0.1:5342/?%s/this.pot:%s"'%(os.path.abspath(os.curdir),hash_slice))
 
