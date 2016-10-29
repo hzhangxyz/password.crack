@@ -2,6 +2,7 @@
 ```
 kill %1 %2 %3 %4;git checkout -- ..;git clean -fdx ..;git pull
 git commit -a -m update ; git push
+export HASHCATFLAG="$HASHCATFLAG -d 1"
 ```
 # environment
 ```
@@ -16,8 +17,8 @@ export BCRGATHER=2225
 export LOCKEDNUM=2
 export ANSFILE=$SERVERDIR/ans.test
 export PASSWDSERVER=node2
-export HASHCATADDR=/public/password.crack/hashcat/hashcat
-export HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
+export HASHCATADDR=/public/password.crack/zj-hashcat/hashcat
+export HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable --restore-disable"
 ```
 # server start
 ```
