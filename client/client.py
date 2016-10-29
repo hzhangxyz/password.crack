@@ -47,7 +47,7 @@ else:
 
 hash_ans_l = hash_length + dict_length + 1
 
-prefix = tempfile.mktemp(prefix="crack_",dir=os.path.curdir)
+prefix = tempfile.mkdtemp(prefix="crack_",dir=os.path.curdir)
 this_hash = os.path.join(prefix,"hash")
 this_dict = os.path.join(prefix,"this.dict")
 this_pot  = os.path.join(prefix,"this.pot")
