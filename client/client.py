@@ -46,9 +46,10 @@ else:
 
 hash_ans_l = hash_length + dict_length + 1
 
-this_hash = "this.hash"
-this_dict = "this.dict"
-this_pot  = "this.pot"
+prefix = tempfile.mktemp(prefix="crack_",dir=os.path.curdir)
+this_hash = os.path.join(prefix,"hash")
+this_dict = os.path.join(prefix,"this.dict")
+this_pot  = os.path.join(prefix,"this.pot")
 
 ans_file_point  = open(ans_file,"r")
 hash_file_point = open(hash_file,"r")
