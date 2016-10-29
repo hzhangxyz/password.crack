@@ -9,7 +9,7 @@ hash_type  = sys.argv[1]
 
 prefix = tempfile.mkdtemp(prefix="crack_",dir=os.path.curdir)
 
-with open(os.path.join(prefix,'pid')) as pid:
+with open(os.path.join(prefix,'pid'),'w') as pid:
     pid.write(str(os.getpid()))
 
 if hash_type[0] == "m":
