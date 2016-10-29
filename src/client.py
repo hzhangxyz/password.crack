@@ -1,19 +1,17 @@
 #!usr/bin/env python
 import sys
 import os
+import subprocess
 
-'curl "127.0.0.1:2435/?query"'
-'l:3:2000:3000'
-
+data       = subprocess.check_output('curl "127.0.0.1:2435/?query"',shell=True)
 hash_type  = sys.argv[1] # "m" or "b"
-hash_file  = sys.argv[2] # file name
-hash_slice = sys.argv[3] # sth like 0:1000
-dict_file  = sys.argv[4]
-dict_slice = sys.argv[5]
-ans_file   = sys.argv[6]
+work_dir   = sys.argv[2]
+ans_file   = sys.argv[3]
+hash_file  = data[:data.find(":")]
+dict_file  = data[1+data.find(":"):]
+hash_slice = dict_file[1+dict_file.find(":",1+dict_file.find(":")):]
 
 hash_slices = map(int,hash_slice.split(":"))
-dict_slices = map(int,dict_slice.split(":"))
 
 dict_length = 36
 
@@ -27,19 +25,13 @@ else:
 hash_ans_l = hash_length + dict_length + 1
 
 this_hash = "this.hash"
-this_dict = "this.dict"
+this_dict = dict_file
 
 ans_file_point  = open(ans_file,"r")
-
 hash_file_point = open(hash_file,"r")
-dict_file_point = open(dict_file,"r")
-
 this_hash_point = open(this_hash,"w")
-this_dict_point = open(this_dict,"w")
 
 hash_file_point.seek(hash_slices[0]*(hash_length+1))
-#dict_file_point.seek(dict_slices[0]*(dict_length+1))
-for i in range(dict_slices[0]):dict_file_point.readline()
 
 ans_file_point.seek((1+hash_ans_l)*hash_slices[0]+hash_length+1)
 for i in range(hash_slices[1]-hash_slices[0]):
@@ -47,11 +39,8 @@ for i in range(hash_slices[1]-hash_slices[0]):
     if ans_file_point.read(1)==":":
         this_hash_point.write(to_write)
     ans_file_point.seek(hash_ans_l,1)
-for i in range(dict_slices[1]-dict_slices[0]):this_dict_point.write(dict_file_point.readline())
 
 hash_file_point.close()
-dict_file_point.close()
 this_hash_point.close()
-this_dict_point.close()
 
 os.system("./hashcat -a 0 -m %d %s %s"%(hash_id,this_hash,this_dict))
