@@ -19,7 +19,7 @@ export PASSWDSERVER=node2
 export HASHCATADDR=/public/password.crack/hashcat/hashcat
 export HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
 ```
-# SERVERDIR start
+# SERVER start
 ```
 ./initial $HASH
 python scatter.py m &
@@ -27,7 +27,7 @@ python scatter.py b &
 python gather.py m &
 python gather.py b &
 ```
-# SERVERDIR end
+# SERVER end
 ```
 python arrange.py $HASH $HASH.md5.cracked $HASH.bcrypt.cracked $ANSFILE
 ```
