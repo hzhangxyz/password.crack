@@ -23,7 +23,7 @@ is_locked  = re.compile("^l:\d+:\d+:\d+$").match
 get_min = lambda x:int(x.split(":")[1])
 
 def change_status(fold_name,name,status):
-    os.rename(os.path.join(fold_name,name),os.path.join(fold_name,"%s%s"%(to_status,name[1:])))
+    os.rename(os.path.join(fold_name,name),os.path.join(fold_name,"%s%s"%(status,name[1:])))
 
 def init():
     data    = filter(is_file,os.listdir(fold_name))
