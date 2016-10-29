@@ -2,6 +2,9 @@
 import sys
 import os
 
+'curl "127.0.0.1:2435/?query"'
+'l:3:2000:3000'
+
 hash_type  = sys.argv[1] # "m" or "b"
 hash_file  = sys.argv[2] # file name
 hash_slice = sys.argv[3] # sth like 0:1000
