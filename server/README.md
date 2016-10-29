@@ -1,3 +1,8 @@
+# script
+```
+kill %1 %2 %3 %4;git checkout -- ..;git clean -fdx ..;git pull
+git commit -a -m update ; git push
+```
 # ENV
 ```
 export SERVERDIR=/public/password.crack/crack/server
@@ -10,7 +15,7 @@ export BCRSCATTER=2224
 export BCRGATHER=2225
 export LOCKEDNUM=2
 export ANSFILE=$SERVERDIR/output
-export PASSWDSERVER=node1
+export PASSWDSERVER=node2
 export HASHCATADDR=/public/password.crack/hashcat/hashcat
 export HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
 ```

@@ -74,4 +74,4 @@ print hashcat_run
 os.system(hashcat_run)
 
 urlget("http://%s:%s/?c%s"%(server,scatter,dict_file[1:]))
-urlget("http://%s:%s/?%s:%s"%(server,gather,os.path.abspath(os.curdir),hash_slice))
+urlget("http://%s:%s/?%s:%s"%(server,gather,os.path.join(os.path.abspath(os.curdir),this_pot),hash_slice))
