@@ -5,7 +5,12 @@ import urllib
 import shutil
 import tempfile
 
-hash_type  = sys.argv[1] # "m" or "b"
+hash_type  = sys.argv[1]
+
+prefix = tempfile.mkdtemp(prefix="crack_",dir=os.path.curdir)
+
+with open(os.path.join(prefix,'pid')) as pid:
+    pid.write(str(os.getpid()))
 
 if hash_type[0] == "m":
     scatter  = os.environ["MD5SCATTER"]
@@ -47,7 +52,6 @@ else:
 
 hash_ans_l = hash_length + dict_length + 1
 
-prefix = tempfile.mkdtemp(prefix="crack_",dir=os.path.curdir)
 this_hash = os.path.join(prefix,"hash")
 this_dict = os.path.join(prefix,"this.dict")
 this_pot  = os.path.join(prefix,"this.pot")
@@ -77,3 +81,5 @@ os.system(hashcat_run)
 
 urlget("http://%s:%s/?c%s"%(server,scatter,dict_file[1:]))
 urlget("http://%s:%s/?%s:%s"%(server,gather,os.path.join(os.path.abspath(os.curdir),this_pot),hash_slice))
+
+os.remove(os.path.join(prefix,'pid'))
