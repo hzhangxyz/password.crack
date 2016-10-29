@@ -3,6 +3,7 @@ import sys
 import os
 import urllib
 import shutil
+import tempfile
 
 hash_type  = sys.argv[1] # "m" or "b"
 
