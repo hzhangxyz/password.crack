@@ -2,10 +2,10 @@
 ```
 HASH=input.test
 ./initial $HASH
-python scatter.py 2435 2 md5_pool &
-python scatter.py 2254 2 bcr_pool &
+python scatter.py 2435 2 md5_pool $HASH.md5 &
+python scatter.py 2254 2 bcr_pool $HASH.bcrypt &
 python gather.py m $HASH.md5.cracked 5342 &
-python gather.py b $HASH.md5.cracked 4232 &
+python gather.py b $HASH.bcrypt.cracked 4232 &
 ```
 # server end
 ```
