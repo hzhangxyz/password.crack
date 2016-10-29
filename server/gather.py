@@ -10,12 +10,12 @@ if hash_type[0] == "m":
     hash_id     = 500
     hash_length = 34
     port_num    = os.environ["MD5GATHER"]
-    cracked_file = "%s.md5.cracked"%os.environ["$HASH"]
+    cracked_file = "%s.md5.cracked"%os.environ["HASH"]
 else:
     hash_id     = 3200
     hash_length = 60
     port_num    = os.environ["BCRGATHER"]
-    cracked_file = "%s.bcr.cracked"%os.environ["$HASH"]
+    cracked_file = "%s.bcr.cracked"%os.environ["HASH"]
 
 hash_ans_l = hash_length + dict_length + 1
 
