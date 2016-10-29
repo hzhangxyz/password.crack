@@ -5,16 +5,17 @@ import urllib
 import shutil
 
 hash_type  = sys.argv[1] # "m" or "b"
-ans_file   = sys.argv[2]
 
 if hash_type[0] == "m":
     scatter  = os.environ["MD5SCATTER"]
     gather   = os.environ["MD5GATHER"]
     dict_dir = os.environ["MD5POOL"]
+    ans_file = "%s.md5.cracked"%os.environ["$HASH"]
 else:
     scatter  = os.environ["BCRSCATTER"]
     gather   = os.environ["BCRGATHER"]
     dict_dir = os.environ["BCRPOOL"]
+    ans_file = "%s.bcr.cracked"%os.environ["$HASH"]
 
 server     = os.environ["PASSWDSERVER"]
 hashcat    = os.environ["HASHCATADDR"]

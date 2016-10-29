@@ -4,14 +4,15 @@ import sys
 import re
 
 hash_type = sys.argv[1]
-hash_file = sys.argv[2]
 
 if hash_type[0]=="m":
     port_num  = os.environ["MD5SCATTER"]
     fold_name = os.environ["MD5POOL"]
+    hash_file = "%s.md5"%os.environ["HASH"]
 else:
     port_num  = os.environ["BCRSCATTER"]
     fold_name = os.environ["BCR5POOL"]
+    hash_file = "%s.bcr"%os.environ["HASH"]
 
 lock_num  = os.environ["LOCKEDNUM"]
 

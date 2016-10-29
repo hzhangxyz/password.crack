@@ -5,9 +5,9 @@ int split_md5_and_bcrypt(char *file_name){
     FILE *fp  = fopen(file_name,"r");
     char md5_file[80], bcrypt_file[80], md5_cracked_file[80], bcrypt_cracked_file[80];
     sprintf(md5_file,"%s.md5",file_name);
-    sprintf(bcrypt_file,"%s.bcrypt",file_name);
+    sprintf(bcrypt_file,"%s.bcr",file_name);
     sprintf(md5_cracked_file,"%s.md5.cracked",file_name);
-    sprintf(bcrypt_cracked_file,"%s.bcrypt.cracked",file_name);
+    sprintf(bcrypt_cracked_file,"%s.bcr.cracked",file_name);
     FILE *md5            = fopen(md5_file,"w");
     FILE *bcrypt         = fopen(bcrypt_file,"w");
     FILE *md5_cracked    = fopen(md5_cracked_file,"w");

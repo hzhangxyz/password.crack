@@ -17,10 +17,10 @@ HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
 # SERVERDIR start
 ```
 ./initial $HASH
-python scatter.py m $HASH.md5 &
-python scatter.py b $HASH.bcrypt &
-python gather.py m $HASH.md5.cracked &
-python gather.py b $HASH.bcrypt.cracked &
+python scatter.py m &
+python scatter.py b &
+python gather.py m &
+python gather.py b &
 ```
 # SERVERDIR end
 ```
@@ -28,5 +28,6 @@ python arrange.py $HASH $HASH.md5.cracked $HASH.bcrypt.cracked $ANSFILE
 ```
 # run a client
 ```
-python client.py m $HASH.md5.cracked
+python client.py m
+python client.py b
 ```
