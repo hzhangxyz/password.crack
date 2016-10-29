@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-int split_md5_and_bcrypt(char *file_name){
+int main(){
+    char *file_name = getenv("HASH");
     FILE *fp  = fopen(file_name,"r");
     char md5_file[80], bcrypt_file[80], md5_cracked_file[80], bcrypt_cracked_file[80];
     sprintf(md5_file,"%s.md5",file_name);
@@ -30,11 +32,6 @@ int split_md5_and_bcrypt(char *file_name){
     fclose(bcrypt);
     fclose(md5_cracked);
     fclose(bcrypt_cracked);
+    return 0;
 }
 
-#ifdef DEBUG
-int main(int argc,char** argv){
-    if(argc>1)
-        split_md5_and_bcrypt(argv[1]);
-}
-#endif

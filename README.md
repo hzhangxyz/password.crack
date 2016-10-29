@@ -29,7 +29,7 @@ python gather.py b &
 ```
 # server end
 ```
-python arrange.py $HASH $HASH.md5.cracked $HASH.bcrypt.cracked $ANSFILE
+python arrange.py $HASH $HASH.md5.cracked $HASH.bcr.cracked $ANSFILE
 ```
 # run a client(need a while)
 ```
