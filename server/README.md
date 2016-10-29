@@ -1,6 +1,8 @@
 # server start
 ```
-HASH=/public/password.crack/crack/server/input.test
+SERVER=/public/password.crack/crack/server
+HASH=$SERVER/input.test
+
 ./initial $HASH
 python scatter.py 2435 2 md5_pool $HASH.md5 &
 python scatter.py 2254 2 bcr_pool $HASH.bcrypt &
@@ -13,7 +15,5 @@ python arrange.py input.test input.test.md5.cracked input.test.bcrypt.cracked an
 ```
 # run a client
 ```
-python client.py m md5_pool $HASH.md5.cracked
-curl "127.0.0.1:8000?this.pot:0:10"
-curl "127.0.0.1:8000/?c:1:0:100"
+python client.py m $SERVER/md5_pool $HASH.md5.cracked
 ```
