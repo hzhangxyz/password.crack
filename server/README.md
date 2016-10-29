@@ -11,15 +11,16 @@ BCRGATHER=2225
 LOCKEDNUM=2
 ANSFILE=$SERVERDIR/output
 PASSWDSERVER=node1
-HASHCAT=/public/password.crack/hashcat/hashcat
+HASHCATADDR=/public/password.crack/hashcat/hashcat
+HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
 ```
 # SERVERDIR start
 ```
 ./initial $HASH
-python scatter.py $MD5SCATTER $LOCKEDNUM $MD5POOL $HASH.md5 &
-python scatter.py $BCRSCATTER $LOCKEDNUM $BCRPOOL $HASH.bcrypt &
-python gather.py m $HASH.md5.cracked $MD5GATHER &
-python gather.py b $HASH.bcrypt.cracked $BCRGATHER &
+python scatter.py m $HASH.md5 &
+python scatter.py b $HASH.bcrypt &
+python gather.py m $HASH.md5.cracked &
+python gather.py b $HASH.bcrypt.cracked &
 ```
 # SERVERDIR end
 ```
@@ -27,5 +28,5 @@ python arrange.py $HASH $HASH.md5.cracked $HASH.bcrypt.cracked $ANSFILE
 ```
 # run a client
 ```
-python client.py m $SERVERDIR/md5_pool $HASH.md5.cracked $MD5SCATTER $MD5GATHER $PASSWDSERVER $HASHCAT
+python client.py m $HASH.md5.cracked
 ```

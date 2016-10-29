@@ -4,16 +4,17 @@ import sys
 
 hash_type    = sys.argv[1]
 cracked_file = sys.argv[2]
-port_num     = sys.argv[3]
 
 dict_length  = 36
 
 if hash_type[0] == "m":
     hash_id     = 500
     hash_length = 34
+    port_num    = os.environ["MD5GATHER"]
 else:
     hash_id     = 3200
     hash_length = 60
+    port_num    = os.environ["BCRGATHER"]
 
 hash_ans_l = hash_length + dict_length + 1
 
@@ -30,6 +31,7 @@ def insert_single(ans_file,to_insert,start_id,end_id):
     ans_pointer.close()
 
 def application(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
     file_name,start_id,end_id = environ["QUERY_STRING"].split(":")
     start_id = int(start_id)
     end_id   = int(end_id)
@@ -37,7 +39,6 @@ def application(environ, start_response):
     for i in pot.xreadlines():
         if i != "":
             insert_single(cracked_file,i,start_id,end_id)
-    start_response('200 OK', [('Content-Type', 'text/plain')])
     return ""
 
 

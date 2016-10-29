@@ -3,10 +3,17 @@ import os
 import sys
 import re
 
-port_num  = sys.argv[1]
-lock_num  = sys.argv[2]
-fold_name = sys.argv[3]
-hash_file = sys.argv[4]
+hash_type = sys.argv[1]
+hash_file = sys.argv[2]
+
+if hash_type[0]=="m":
+    port_num  = os.environ["MD5SCATTER"]
+    fold_name = os.environ["MD5POOL"]
+else:
+    port_num  = os.environ["BCRSCATTER"]
+    fold_name = os.environ["BCR5POOL"]
+
+lock_num  = os.environ["LOCKEDNUM"]
 
 is_file    = re.compile("^[tlpcb]:\d+:\d+:\d+$").match
 is_tocrack = re.compile("^t:\d+:\d+:\d+$").match

@@ -1,22 +1,24 @@
-#!usr/bin/env python
+#!/usr/bin/env python
 import sys
 import os
 import urllib
 import shutil
 
-tmp=os.system
-def oss(n):
-    print n
-    tmp(n)
-os.system=oss
-
 hash_type  = sys.argv[1] # "m" or "b"
-dict_dir   = sys.argv[2]
-ans_file   = sys.argv[3]
-scatter    = sys.argv[4]
-gather     = sys.argv[5]
-server     = sys.argv[6]
-hashcat    = sys.argv[7]
+ans_file   = sys.argv[2]
+
+if hash_type[0] == "m":
+    scatter  = os.environ["MD5SCATTER"]
+    gather   = os.environ["MD5GATHER"]
+    dict_dir = os.environ["MD5POOL"]
+else:
+    scatter  = os.environ["BCRSCATTER"]
+    gather   = os.environ["BCRGATHER"]
+    dict_dir = os.environ["BCRPOOL"]
+
+server     = os.environ["PASSWDSERVER"]
+hashcat    = os.environ["HASHCATADDR"]
+hcflag     = os.environ["HASHCATFLAG"]
 
 def urlget(n):
     c = urllib.urlopen(n)
@@ -66,7 +68,9 @@ this_hash_point.close()
 
 shutil.copyfile(os.path.join(dict_dir,"p%s"%dict_file[1:]),this_dict)
 
-os.system("%s -w 4 -a 0 -m %d --potfile-path %s %s %s"%(hashcat,hash_id,this_pot,this_hash,this_dict))
+hashcat_run = "%s %s --hash-type %d --potfile-path %s %s %s"%(hashcat,hcflag,hash_id,this_pot,this_hash,this_dict)
+print hashcat_run
+os.system(hashcat_run)
 
-urlget("%s:%s/?c%s"%(server,scatter,dict_file[1:]))
-urlget("%s:%s/?%s:%s"%(server,gather,os.path.abspath(os.curdir),hash_slice))
+urlget("http://%s:%s/?c%s"%(server,scatter,dict_file[1:]))
+urlget("http://%s:%s/?%s:%s"%(server,gather,os.path.abspath(os.curdir),hash_slice))
