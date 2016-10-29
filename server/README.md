@@ -3,7 +3,7 @@
 kill %1 %2 %3 %4;git checkout -- ..;git clean -fdx ..;git pull
 git commit -a -m update ; git push
 ```
-# ENV
+# environment
 ```
 export SERVERDIR=/public/password.crack/crack/server
 export HASH=$SERVERDIR/input.test
@@ -19,7 +19,7 @@ export PASSWDSERVER=node2
 export HASHCATADDR=/public/password.crack/hashcat/hashcat
 export HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
 ```
-# SERVER start
+# server start
 ```
 ./initial $HASH
 python scatter.py m &
@@ -27,7 +27,7 @@ python scatter.py b &
 python gather.py m &
 python gather.py b &
 ```
-# SERVER end
+# server end
 ```
 python arrange.py $HASH $HASH.md5.cracked $HASH.bcrypt.cracked $ANSFILE
 ```
