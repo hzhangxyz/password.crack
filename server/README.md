@@ -10,7 +10,9 @@ python gather.py b $HASH.md5.cracked 4232 &
 ```
 python arrange.py input.test input.test.md5.cracked input.test.bcrypt.cracked ans.test
 ```
-
+```
+python client.py m md5_pool $HASH.md5.cracked
+```
 
 
 ```
