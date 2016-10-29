@@ -25,7 +25,7 @@ else:
 hash_ans_l = hash_length + dict_length + 1
 
 this_hash = "this.hash"
-this_dict = dict_file
+this_dict = "this.dict"
 
 ans_file_point  = open(ans_file,"r")
 hash_file_point = open(hash_file,"r")
@@ -43,4 +43,10 @@ for i in range(hash_slices[1]-hash_slices[0]):
 hash_file_point.close()
 this_hash_point.close()
 
-os.system("./hashcat -a 0 -m %d %s %s"%(hash_id,this_hash,this_dict))
+os.system("cp %s this.dict"%os.path.join(work_dir,"p%s"%dict_file[1:]))
+
+to_run = "./hashcat -a 0 -m %d %s %s"%(hash_id,this_hash,this_dict)
+print to_run
+os.system(to_run)
+
+
