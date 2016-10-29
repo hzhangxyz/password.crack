@@ -1,6 +1,6 @@
 # server start
 ```
-HASH=input.test
+HASH=/public/password.crack/crack/server/input.test
 ./initial $HASH
 python scatter.py 2435 2 md5_pool $HASH.md5 &
 python scatter.py 2254 2 bcr_pool $HASH.bcrypt &
