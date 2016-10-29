@@ -14,7 +14,7 @@ export MD5GATHER=2223
 export BCRSCATTER=2224
 export BCRGATHER=2225
 export LOCKEDNUM=2
-export ANSFILE=$SERVERDIR/output
+export ANSFILE=$SERVERDIR/ans.test
 export PASSWDSERVER=node2
 export HASHCATADDR=/public/password.crack/hashcat/hashcat
 export HASHCATFLAG="--attack-mode 0 --workload-profile 4 --gpu-temp-disable"
@@ -31,7 +31,7 @@ python gather.py b &
 ```
 python arrange.py $HASH $HASH.md5.cracked $HASH.bcrypt.cracked $ANSFILE
 ```
-# run a client
+# run a client(need a while)
 ```
 python client.py m
 python client.py b
