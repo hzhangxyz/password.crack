@@ -5,7 +5,7 @@ import urllib
 import shutil
 import tempfile
 
-hash_type  = sys.argv[1]
+hash_type = sys.argv[1]
 
 prefix = tempfile.mkdtemp(prefix="crack_",dir=os.path.curdir)
 
