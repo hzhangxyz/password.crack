@@ -26,6 +26,7 @@ else:
 server     = os.environ["PASSWDSERVER"]
 hashcat    = os.environ["HASHCATADDR"]
 hcflag     = os.environ["HASHCATFLAG"]
+dvcflag    = os.environ["DEVICEFLAG"]
 
 def urlget(n):
     c = urllib.urlopen(n)
@@ -75,7 +76,7 @@ this_hash_point.close()
 
 shutil.copyfile(os.path.join(dict_dir,"p%s"%dict_file[1:]),this_dict)
 
-hashcat_run = "%s %s --hash-type %d --potfile-path %s %s %s"%(hashcat,hcflag,hash_id,this_pot,this_hash,this_dict)
+hashcat_run = "%s %s %s --hash-type %d --potfile-path %s %s %s"%(hashcat,hcflag,dvcflag,hash_id,this_pot,this_hash,this_dict)
 print hashcat_run
 os.system(hashcat_run)
 
