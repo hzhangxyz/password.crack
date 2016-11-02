@@ -22,6 +22,12 @@ server     = os.environ["PASSWDSERVER"]
 hashcat    = os.environ["HASHCATADDR"]
 hcflag     = os.environ["HASHCATFLAG"]
 dvcflag    = os.environ["DEVICEFLAG"]
+clientdir  = os.environ["CLIENTDIR"]
+
+prefix = tempfile.mkdtemp(prefix="proc_",dir=clientdir)
+
+with open(os.path.join(prefix,'pid'),'w') as pid:
+    pid.write(str(os.getpid()))
 
 def urlget(n):
     c = urllib.urlopen(n)
@@ -30,13 +36,6 @@ def urlget(n):
     return d
 
 query      = urlget("http://%s:%s/?query"%(server,scatter))
-
-prefix = tempfile.mkdtemp(prefix="crack_",dir=os.path.curdir)
-
-with open(os.path.join(prefix,'pid'),'w') as pid:
-    pid.write(str(os.getpid()))
-    pid.write('\n')
-    pid.write(query)
 
 hash_file  = query[:query.find(":")]
 dict_file  = query[1+query.find(":"):]
