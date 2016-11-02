@@ -1,6 +1,6 @@
 # useful script
 ```
-export HASHCATFLAG="$HASHCATFLAG -d 1"
+export DEVICEFLAG="-d 1,2,3,4,5,6,7,8"
 ```
 
 # environment
@@ -24,3 +24,14 @@ look up in `end.sh`
 - p:crack pending
 - c:completed
 - b:crack break
+
+# ATTENSION
+key length <= 35
+
+# TODO?
+CLIENT and DEVICE
+DICT
+
+# Q
+一个set减去另一个set？
+
