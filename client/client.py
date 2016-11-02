@@ -7,11 +7,6 @@ import tempfile
 
 hash_type = sys.argv[1]
 
-prefix = tempfile.mkdtemp(prefix="crack_",dir=os.path.curdir)
-
-with open(os.path.join(prefix,'pid'),'w') as pid:
-    pid.write(str(os.getpid()))
-
 if hash_type[0] == "m":
     scatter  = os.environ["MD5SCATTER"]
     gather   = os.environ["MD5GATHER"]
@@ -35,6 +30,13 @@ def urlget(n):
     return d
 
 query      = urlget("http://%s:%s/?query"%(server,scatter))
+
+prefix = tempfile.mkdtemp(prefix="crack_",dir=os.path.curdir)
+
+with open(os.path.join(prefix,'pid'),'w') as pid:
+    pid.write(str(os.getpid()))
+    pid.write('\n')
+    pid.write(query)
 
 hash_file  = query[:query.find(":")]
 dict_file  = query[1+query.find(":"):]

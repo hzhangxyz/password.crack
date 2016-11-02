@@ -1,25 +1,17 @@
-# script
+# useful script
 ```
-kill %1 %2 %3 %4;git checkout -- ..;git clean -fdx ..;git pull
-git commit -a -m update ; git push
 export HASHCATFLAG="$HASHCATFLAG -d 1"
 ```
+
 # environment
-```
 look up in `env.conf`
-```
+
 # server start
-```
-./initial
-./scatter.py m &
-./scatter.py b &
-./gather.py m &
-./gather.py b &
-```
+look up in `start.sh`
+
 # server end
-```
-./finish
-```
+look up in `end.sh`
+
 # run a client(need a while)
 ```
 ./client.py m
