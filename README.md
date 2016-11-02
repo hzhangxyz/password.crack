@@ -33,5 +33,5 @@ CLIENT and DEVICE
 DICT
 
 # Q
-一个set减去另一个set？
+minus a set and another ?
 
