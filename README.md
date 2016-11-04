@@ -30,8 +30,7 @@ key length <= 35
 
 # TODO?
 CLIENT and DEVICE
+    PAUSE KILL
 DICT
-
-# Q
-minus a set and another ?
-
+BROKEN RECOVERY
+POWER

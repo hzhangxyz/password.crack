@@ -44,10 +44,11 @@ def split(inf,outf):
     [i.close() for i in outff]
 
 import os
-def copy(intf,num,startid,beginner,length):
+def copy(intf,num,startid,beginner,ender):
+    length = (ender - beginner)/num
     for i in range(num):
         n = "t:%d:%d:%d"%((i+startid),(beginner + length*i),(beginner + length*(i+1)))
-        os.system("cp %s %s"%(intf,n))
+        os.system("ln -s %s %s"%(intf,n))
 
 #
 

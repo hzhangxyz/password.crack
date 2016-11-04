@@ -26,10 +26,12 @@ clientdir  = os.environ["CLIENTDIR"]
 
 prefix = tempfile.mkdtemp(prefix="proc_",dir=clientdir)
 
-with open(os.path.join(prefix,'pid'),'w') as pid:
-    pid.write(str(os.getpid()))
+this_hash = os.path.join(prefix,"hash")
+this_dict = os.path.join(prefix,"this.dict")
+this_pot  = os.path.join(prefix,"this.pot")
 
 def urlget(n):
+    print n
     c = urllib.urlopen(n)
     d = c.readline()
     c.close()
@@ -43,6 +45,11 @@ hash_slice = dict_file[1+dict_file.find(":",1+dict_file.find(":")):]
 
 hash_slices = map(int,hash_slice.split(":"))
 
+with open(os.path.join(prefix,'pid'),'w') as pid:
+    pid.write(str(os.getpid()))
+    pid.write("\n")
+    pid.write("http://%s:%s/?%s:%s"%(server,gather,os.path.join(os.path.abspath(os.curdir),this_pot),hash_slice))
+
 dict_length = 36
 
 if hash_type[0] == "m":
@@ -53,10 +60,6 @@ else:
     hash_length = 60
 
 hash_ans_l = hash_length + dict_length + 1
-
-this_hash = os.path.join(prefix,"hash")
-this_dict = os.path.join(prefix,"this.dict")
-this_pot  = os.path.join(prefix,"this.pot")
 
 ans_file_point  = open(ans_file,"r")
 hash_file_point = open(hash_file,"r")
