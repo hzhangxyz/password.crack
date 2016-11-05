@@ -21,9 +21,9 @@
 - b:crack break
 
 # ATTENSION
-key length <= 35 => just attension
-Param and Source => power and source
-Dicts            => think and find
+- key length <= 35 => just attension
+- Param and Source => power and source
+- Dicts            => think and find
 
 # TODO
 BROKEN RECOVERY
