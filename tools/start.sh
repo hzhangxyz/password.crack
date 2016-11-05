@@ -1,0 +1,2 @@
+$SERVERDIR/initial
+./resume.sh

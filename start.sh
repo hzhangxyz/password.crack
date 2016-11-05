@@ -1,2 +1,0 @@
-./server/initial
-./resume.sh
