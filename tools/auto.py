@@ -30,7 +30,8 @@ def handler(signal_num,frame):
     try:
         raw_input()
     except:
-        os.system("pfornode killall -9 hashcat")
+        for i in nodes:
+            os.system("ssh %i killall -9 hashcat &"%i)
     exit()
 
 # get PDU

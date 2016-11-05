@@ -24,7 +24,7 @@ hcflag     = os.environ["HASHCATFLAG"]
 dvcflag    = os.environ["DEVICEFLAG"]
 clientdir  = os.environ["CLIENTDIR"]
 
-prefix = tempfile.mkdtemp(prefix="proc_",dir="pool")
+prefix = tempfile.mkdtemp(prefix="proc_",dir=os.path.join(clientdir,"pool"))
 
 this_hash = os.path.join(prefix,"hash")
 this_dict = os.path.join(prefix,"this.dict")
@@ -49,6 +49,11 @@ with open(os.path.join(prefix,'pid'),'w') as pid:
     pid.write(str(os.getpid()))
     pid.write("\n")
     pid.write("http://%s:%s/?%s:%s"%(server,gather,os.path.join(os.path.abspath(os.curdir),this_pot),hash_slice))
+
+with open(os.path.join(prefix,"log"),"w") as log:
+    log.write(str(os.getpid()))
+    log.write("\n")
+    log.write(os.path.realpath(os.path.join(dict_dir,"p%s"%dict_file[1:])))
 
 dict_length = 36
 
