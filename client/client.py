@@ -24,7 +24,7 @@ hcflag     = os.environ["HASHCATFLAG"]
 dvcflag    = os.environ["DEVICEFLAG"]
 clientdir  = os.environ["CLIENTDIR"]
 
-prefix = tempfile.mkdtemp(prefix="proc_",dir=clientdir)
+prefix = tempfile.mkdtemp(prefix="proc_",dir="pool")
 
 this_hash = os.path.join(prefix,"hash")
 this_dict = os.path.join(prefix,"this.dict")

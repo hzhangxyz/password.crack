@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 # parameter
-dd = 0 # sum of var and threshold
+dd = 100 # sum of var and threshold
 maximum = 3000 - dd
 nodes = ["node2", "node3"]
 md5 = {"node2":200, "node3":300}
-bcr = {"node2":200, "node3":300}
+bcr = {"node2":150, "node3":200}
 gpu_available = {"node2":[1,2,3,4,5,6,7,8], "node3":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]}
 sec = 5
 runed = 25
@@ -32,15 +32,10 @@ def handler(signal_num,frame):
         os.system("pfornode killall -9 hashcat")
     exit()
 
-signal.signal(signal.SIGINT, handler)
-
 # get PDU
 def p(n):
     global m
     m = 22.5*float(n)
-
-socketIO = SocketIO('localhost', 8800, LoggingNamespace)
-socketIO.on('power', p)
 
 def power_now():
     global m
@@ -54,6 +49,12 @@ def get_hashcat_now(n):
         return map(lambda x:int(x)+1,subprocess.check_output("ssh %s nvidia-smi | awk '/hashcat/{printf $2\"\\n\"}'"%n,shell=True).split())
     except:
         return gpu_available[n]
+
+def kill_hashcat(nodes,gpu):
+    to_run = "ssh %s nvidia-smi | awk '/hashcat/{printf $2 \" \" $3 \"\\n\"}'"%nodes
+    s = subprocess.check_output(to_run,shell=True).split()
+    d = {s[2*i]:s[2*i+1] for i in range(len(s)/2)}[str(gpu-1)]
+    print d
 
 # run hashcat
 def run_hashcat(node,gpu,hash_type):
@@ -87,11 +88,15 @@ def main():
                     continue
                 run_hashcat(i,empty,hash_type)
                 if alert < power:
-                    print "WAIT ",runed,"s since power >",alert
+                    print "WAIT",runed,"s since power >",alert
                     time.sleep(runed)
                 break
             else:
                 print "NO more power for",hash_type,"of",i,":",times[i]
 
 if __name__=="__main__":
+    global sockerIO
+    socketIO = SocketIO('localhost', 8800, LoggingNamespace)
+    socketIO.on('power', p)
+    signal.signal(signal.SIGINT, handler)
     main()
