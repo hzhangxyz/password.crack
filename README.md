@@ -19,6 +19,7 @@
 - p:crack pending
 - c:completed
 - b:crack break
+in dicts , f is some tools
 
 # ATTENSION
 - key length <= 35 => just attension
