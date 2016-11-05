@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-nodes = ["node2","node3"]
-
 import os
+nodes = ["node2","node3"]
 pool = os.path.join(os.environ["CLIENTDIR"],"pool")
 pools = filter(lambda x:x[0]=='p', os.listdir(pool))
 for i in pools:
@@ -14,6 +13,6 @@ for i in pools:
             if os.system("ssh %s ps -p %s"%(j,d[0]))==0:
                 flag = False
         if flag:
-            os.system(d[1])
+            os.system("curl %s"%d[1])
 
 
