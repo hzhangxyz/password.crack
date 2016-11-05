@@ -57,10 +57,10 @@ def get_hashcat_now(n):
 
 # run hashcat
 def run_hashcat(node,gpu,hash_type):
-    to_run = "ssh %s 'source %s; export DEVICEFLAG=\"-d %d\";%s %s' 1>/dev/null 2>&1&"%(\
+    to_run = "ssh %s 'source %s; export DEVICEFLAG=\"-d %s\";%s %s' 1>/dev/null 2>&1&"%(\
         node,\
         os.path.join(clientdir,"..","env.conf"),\
-        gpu,\
+        str(gpu),\
         os.path.join(clientdir,"client.py"),\
         hash_type,\
     )

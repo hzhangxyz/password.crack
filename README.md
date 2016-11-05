@@ -1,22 +1,16 @@
-# useful script
-```
-export DEVICEFLAG="-d 1,2,3,4,5,6,7,8"
-```
-
-# environment
-look up in `env.conf`
-
-# server start
-look up in `start.sh`
-
-# server end
-look up in `end.sh`
+# in tools
+`start.sh`  : start
+`end.sh`    : end
+`resume.sh` : resume
+`auto.sh`   : auto run client
+`mon.sh`    : monitor and kill when danger
+`alert.sh`  : killall hashcat and stop to generate new client
+`env.conf`  : useful environment
 
 # run a client(need a while)
-```
-./client.py m
-./client.py b
-```
+`cstart/arr.py`
+`run_hashcat("node2","1,2,3","m")`
+
 # dictionary format
 `status:order:start:end`
 - t:to crack
@@ -27,6 +21,7 @@ look up in `end.sh`
 
 # ATTENSION
 key length <= 35
+source env.conf !!!
 
 # TODO?
 CLIENT and DEVICE
