@@ -25,6 +25,8 @@ def main():
     if flag:
         n = 22.5*float(power_now())
         if n > 2950:
+            os.system("kill -2 `ps aux | grep arr | grep -v grep | awk '{printf $2}'`")
+            os.system("kill -2 `ps aux | grep arr | grep -v grep | awk '{printf $2}'`")
             os.system("pfornode killall -9 hashcat")
         a = len(check_output("ssh node2 nvidia-smi | awk '/hashcat/{printf $2\" \"}'",shell=True).split())
         b = len(check_output("ssh node3 nvidia-smi | awk '/hashcat/{printf $2\" \"}'",shell=True).split())
