@@ -2,10 +2,10 @@
 `start.sh`  : start
 `end.sh`    : end
 `resume.sh` : resume
-`auto.sh`   : auto run client
-`mon.sh`    : monitor and kill when danger
+`auto.sh`   : auto run client (WITH param)
+`mon.sh`    : monitor and kill when dangera (WITH param)
 `alert.sh`  : killall hashcat and stop to generate new client
-`env.conf`  : useful environment
+`env.conf`  : useful environment (WITH param, NEED source)
 
 # run a client(need a while)
 `cstart/arr.py`
