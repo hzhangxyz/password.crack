@@ -27,5 +27,3 @@ in dicts , f is some tools
 - Param and Source => power and source
 - Dicts            => think and find
 
-# TODO
-BROKEN RECOVERY
