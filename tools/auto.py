@@ -55,7 +55,9 @@ def kill_hashcat(nodes,gpu):
     to_run = "ssh %s nvidia-smi | awk '/hashcat/{printf $2 \" \" $3 \"\\n\"}'"%nodes
     s = subprocess.check_output(to_run,shell=True).split()
     d = {s[2*i]:s[2*i+1] for i in range(len(s)/2)}[str(gpu-1)]
-    print d
+    to_run = "ssh %s kill -9 %s"%(nodes,d)
+    print "KILL",to_run
+    os.system(to_run)
 
 # run hashcat
 def run_hashcat(node,gpu,hash_type):

@@ -11,6 +11,7 @@
 # run a client(need a while)
 `tools/auto.py`
 `run_hashcat("node2","1,2,3","m")`
+`kill_hashcat("node2",4)`
 
 # dictionary format
 `status:order:start:end`
