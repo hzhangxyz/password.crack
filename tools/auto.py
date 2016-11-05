@@ -23,7 +23,7 @@ import signal
 ddd = 2*max(max(md5.values()),max(bcr.values()))
 alert = maximum - ddd - dd
 clientdir = os.environ["CLIENTDIR"]
-maindir = os.environ["MAINDIR"]
+tooldir = os.environ["TOOLDIR"]
 
 # SIGINT
 def handler(signal_num,frame):
@@ -61,7 +61,7 @@ def kill_hashcat(nodes,gpu):
 def run_hashcat(node,gpu,hash_type):
     to_run = "ssh %s 'source %s; export DEVICEFLAG=\"-d %s\";%s %s' 1>/dev/null 2>&1&"%(\
         node,\
-        os.path.join(maindir,"tools","env.conf"),\
+        os.path.join(tooldir,"env.conf"),\
         str(gpu),\
         os.path.join(clientdir,"client.py"),\
         hash_type,\
