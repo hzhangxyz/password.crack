@@ -15,4 +15,3 @@ for i in pools:
         if flag:
             os.system("curl %s"%d[1])
 
-
