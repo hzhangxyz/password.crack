@@ -54,6 +54,7 @@ with open(os.path.join(prefix,"log"),"w") as log:
     log.write(str(os.getpid()))
     log.write("\n")
     log.write(os.path.realpath(os.path.join(dict_dir,"p%s"%dict_file[1:])))
+    log.write("\n")
 
 dict_length = 36
 

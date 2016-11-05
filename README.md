@@ -25,5 +25,5 @@ in dicts , f is some tools
 # ATTENSION
 - key length <= 35 => just attension
 - Param and Source => power and source
-- Dicts            => think and find
+- Dicts            => think and find, and f.py
 
