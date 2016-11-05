@@ -1,1 +1,0 @@
-$SERVERDIR/../cstart/mon.py

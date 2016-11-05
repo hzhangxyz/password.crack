@@ -1,14 +1,14 @@
 # in tools
-`start.sh`  : start
-`end.sh`    : end
-`resume.sh` : resume
-`auto.sh`   : auto run client (WITH param)
-`mon.sh`    : monitor and kill when dangera (WITH param)
+`start.sh`  : start server
+`end.sh`    : end server
+`resume.sh` : resume server
+`auto.py`   : auto run client (WITH param)
+`mon.py`    : monitor and kill when dangera, with a file in argv, it only output pdu (WITH param)
 `alert.sh`  : killall hashcat and stop to generate new client
 `env.conf`  : useful environment (WITH param, NEED source)
 
 # run a client(need a while)
-`cstart/arr.py`
+`tools/auto.py`
 `run_hashcat("node2","1,2,3","m")`
 
 # dictionary format
@@ -21,11 +21,9 @@
 
 # ATTENSION
 key length <= 35
-source env.conf !!!
+Param and Source
 
 # TODO?
-CLIENT and DEVICE
-    PAUSE KILL
 DICT
 BROKEN RECOVERY
 POWER

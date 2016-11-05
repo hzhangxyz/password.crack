@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # parameter
-dd = 100 # sum of var and threshold
+dd = 0 # sum of var and threshold
 maximum = 3000 - dd
 nodes = ["node2", "node3"]
 md5 = {"node2":200, "node3":300}

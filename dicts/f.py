@@ -36,11 +36,11 @@ def split(inf,outf):
     with open(inf,"r") as f:
         d=f.read().split("\n")
     outff = [open(i,"w") for i in outf]
-    m = len(outf)
     n = len(d)
+    m = n/len(outf)
     for i in xrange(n):
-        outff[i%m].write(d[i])
-        outff[i%m].write("\n")
+        outff[i/m].write(d[i])
+        outff[i/m].write("\n")
     [i.close() for i in outff]
 
 import os
