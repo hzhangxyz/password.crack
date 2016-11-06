@@ -22,8 +22,8 @@ def power_now():
     return m
 
 def main():
+    n = 22.5*float(power_now())
     if flag:
-        n = 22.5*float(power_now())
         if n > 2950:
             os.system("kill -2 `ps aux | grep auto.py | grep -v grep | awk '{printf $2}'`")
             os.system("kill -2 `ps aux | grep auto.py | grep -v grep | awk '{printf $2}'`")
@@ -33,7 +33,7 @@ def main():
         print "%f\t%d\t%d"%(n,a,b)
     else:
         with open(argv[1],"a") as f:
-            f.write("%s %f\n"%(check_output("date +%s",shell=True)[:-1], 22.5*float(m)))
+            f.write("%s %f\n"%(check_output("date +%s",shell=True)[:-1], n))
 
 while True:
     main()
