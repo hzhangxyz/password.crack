@@ -19,10 +19,10 @@ socketIO.on('power', p)
 def power_now():
     socketIO.wait(seconds=1)
     global m
-    return m
+    return float(m)*22.5
 
 def main():
-    n = 22.5*float(power_now())
+    n = power_now()
     if flag:
         if n > 2950:
             os.system("kill -2 `ps aux | grep auto.py | grep -v grep | awk '{printf $2}'`")

@@ -2,7 +2,7 @@
 
 # parameter
 dd = 100 # sum of var and threshold
-maximum = 3000 - dd
+maximum = 2000 - dd
 nodes = ["node2", "node3"]
 md5 = {"node2":200, "node3":300}
 bcr = {"node2":150, "node3":200}
@@ -18,6 +18,7 @@ import time
 import os
 from socketIO_client import SocketIO, LoggingNamespace
 import signal
+import threading
 
 # constant
 ddd = 2*max(max(md5.values()),max(bcr.values()))
@@ -98,9 +99,26 @@ def main():
             else:
                 print "NO more power for",hash_type,"of",i,":",times[i]
 
+def  mon():
+    while True:
+        if power_now() > maximum:
+            gpus = [[i,get_hashcat_now(i)] for i in nodes]
+            gpus.reverse()
+            while power_now() < maximum:
+                for i in gpus:
+                    if i[1]:
+                        kill_hashcat(i[0],i[1].pop())
+                        break
+            continue
+
 if __name__=="__main__":
     global sockerIO
     socketIO = SocketIO('localhost', 8800, LoggingNamespace)
     socketIO.on('power', p)
     signal.signal(signal.SIGINT, handler)
-    main()
+    t1 = threading.Thread(target=main)
+    t2 = threading.Thread(target=mon)
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
