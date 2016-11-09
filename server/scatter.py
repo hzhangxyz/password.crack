@@ -49,7 +49,7 @@ def application(environ, start_response):
     if query == "query":
         return "%s:%s"%(hash_file,query_one())
     else:
-        os.rename("%s/p%s"%(fold_name,query[1:]),"%s/%s"%(fold_name,query))
+        os.rename(os.path.join(fold_name,"p%s"%query[1:]),os.path.join(fold_name,query))
         return ""
 
 init()
