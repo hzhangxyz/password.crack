@@ -1,18 +1,15 @@
-#!/usr/bin/env python
-
 def readfile(filename):
     with open(filename,"r") as f:
         d=set(f.read().split("\n"))
     return d
 
 def writefile(filename,data):
+    date = sortlist(data)
     with open(filename,"w") as f:
         for i in data:
             f.write(i)
             f.write("\n")
     return 0
-
-from re import match
 
 def sortlist(n):
     d=list(n)
@@ -20,13 +17,20 @@ def sortlist(n):
     return d
 
 def split(inl,nums):
-    l = list(inl)
+    l = sortlist(inl)
     d = []
     ll = len(l)
     for i in range(nums):
         d.append(l[i*ll/nums:(i+1)*ll/nums])
     return d
 
+def spliter(inf,nums):
+    i = readfile(inf)
+    d = split(i,nums)
+    for i,j in enumerate(d):
+        writefile("%s.%d"%(inf,i),j)
+
+from re import match
 filt  = lambda x,y : filter(lambda z:match(x,z),y)
 
 patterns = [
@@ -86,15 +90,18 @@ patterns = [
 ]
 
 def ana(filename):
-    print "[%s]"%filename
+    print("[%s]"%filename)
     d = readfile(filename) - set([""])
-    print "%d\ttotal"%len(d)
+    print("%d\ttotal"%len(d))
     nums = [filt(i,d) for i in patterns]
     for i in range(len(patterns)):
-        print "%d\t%s"%(len(nums[i]),patterns[i])
+        print("%d\t%s"%(len(nums[i]),patterns[i]))
         d -= set(nums[i])
-    print "%d\tother"%len(d)
-    print ""
+    print("%d\tother"%len(d))
+    print("")
     return d
 
+import sys
 
+if __name__ == "__main__":
+    writefile("%s.other"%sys.argv[1],ana(sys.argv[1]))
