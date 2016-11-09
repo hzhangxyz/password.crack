@@ -9,7 +9,7 @@
 - `recov.py`  : recovery ans not reported
 
 # run a client(need a while)
-`tools/auto.py`
+`runs/starter.py`
 `run_hashcat("node2","1,2,3","m")`
 `kill_hashcat("node2",4)`
 
