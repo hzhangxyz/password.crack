@@ -24,6 +24,6 @@ in dicts , f is some tools
 
 # ATTENSION
 - key length <= 35 => just attension
-- Param and Source => power and source killer.py starter.py
+- Param and Source => env.conf killer.py starter.py
 - Dicts            => think and find, and f.py
 - program stable   => try except and test
