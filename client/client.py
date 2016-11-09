@@ -4,6 +4,7 @@ import os
 import urllib
 import shutil
 import tempfile
+import socket
 
 hash_type = sys.argv[1]
 
@@ -24,7 +25,7 @@ hcflag     = os.environ["HASHCATFLAG"]
 dvcflag    = os.environ["DEVICEFLAG"]
 clientdir  = os.environ["CLIENTDIR"]
 
-prefix = tempfile.mkdtemp(prefix="proc_",dir=os.path.join(clientdir,"pool"))
+prefix = tempfile.mkdtemp(prefix="client_",dir=os.path.join(clientdir,"pool"))
 
 this_hash = os.path.join(prefix,"hash")
 this_dict = os.path.join(prefix,"this.dict")
@@ -46,14 +47,14 @@ hash_slice = dict_file[1+dict_file.find(":",1+dict_file.find(":")):]
 hash_slices = map(int,hash_slice.split(":"))
 
 with open(os.path.join(prefix,'pid'),'w') as pid:
-    pid.write(str(os.getpid()))
+    pid.write("%s %d\n"(socket.gethostname(),os.getpid()))
+    pid.write("http://%s:%s/?%s:%s\n"%(server,gather,os.path.join(os.path.abspath(os.curdir),this_pot),hash_slice))
     pid.write("\n")
-    pid.write("http://%s:%s/?%s:%s"%(server,gather,os.path.join(os.path.abspath(os.curdir),this_pot),hash_slice))
 
 with open(os.path.join(prefix,"log"),"w") as log:
-    log.write(str(os.getpid()))
-    log.write("\n")
+    log.write("%s %d\n"(socket.gethostname(),os.getpid()))
     log.write(os.path.realpath(os.path.join(dict_dir,"p%s"%dict_file[1:])))
+    log.write("http://%s:%s/?%s:%s\n"%(server,gather,os.path.join(os.path.abspath(os.curdir),this_pot),hash_slice))
     log.write("\n")
 
 dict_length = 36
