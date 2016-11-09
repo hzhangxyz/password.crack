@@ -27,7 +27,8 @@ def main():
         if n > 2950:
             os.system("kill -2 `ps aux | grep auto.py | grep -v grep | awk '{printf $2}'`")
             os.system("kill -2 `ps aux | grep auto.py | grep -v grep | awk '{printf $2}'`")
-            os.system("pfornode killall -9 hashcat")
+            os.system("ssh node2 killall -9 hashcat &")
+            os.system("ssh node3 killall -9 hashcat &")
         a = len(check_output("ssh node2 nvidia-smi | awk '/hashcat/{printf $2\" \"}'",shell=True).split())
         b = len(check_output("ssh node3 nvidia-smi | awk '/hashcat/{printf $2\" \"}'",shell=True).split())
         print "%f\t%d\t%d"%(n,a,b)

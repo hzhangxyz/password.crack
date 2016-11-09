@@ -1,4 +1,4 @@
-# in tools
+# tools
 - `start.sh`  : start server
 - `end.sh`    : end server
 - `resume.sh` : resume server
@@ -24,6 +24,6 @@ in dicts , f is some tools
 
 # ATTENSION
 - key length <= 35 => just attension
-- Param and Source => power and source
+- Param and Source => power and source killer.py starter.py
 - Dicts            => think and find, and f.py
-
+- program stable   => try

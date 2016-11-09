@@ -2,14 +2,15 @@
 
 # parameter
 dd = 100 # sum of var and threshold
-maximum = 2000 - dd
+dg = 50  # dangerous gate
+totalpower = 3000
 nodes = ["node2", "node3"]
 md5 = {"node2":200, "node3":300}
 bcr = {"node2":150, "node3":200}
 gpu_available = {"node2":[1,2,3,4,5,6,7,8], "node3":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]}
 sec = 5
 runed = 25
-hash_type = "b"
+hash_type = "m"
 
 # import
 import urllib
@@ -22,7 +23,9 @@ import threading
 
 # constant
 ddd = 2*max(max(md5.values()),max(bcr.values()))
-alert = maximum - ddd - dd
+maximum = totalpower - dd
+dangerp = totalpower - dg
+alert = maximum - ddd
 clientdir = os.environ["CLIENTDIR"]
 tooldir = os.environ["TOOLDIR"]
 
@@ -47,11 +50,13 @@ def power_now():
     return int(m)
 
 # get hashcat
-def get_hashcat_now(n):
+def get_hashcat_now(node):
     try:
-        return map(lambda x:int(x)+1,subprocess.check_output("ssh %s nvidia-smi | awk '/hashcat/{printf $2\"\\n\"}'"%n,shell=True).split())
+        return map(lambda x:int(x)+1,subprocess.check_output("ssh %s nvidia-smi | awk '/hashcat/{printf $2\"\\n\"}'"%node,shell=True).split())
     except:
-        return gpu_available[n]
+        return gpu_available[node]
+
+# kill hashcat
 
 def kill_hashcat(nodes,gpu):
     to_run = "ssh %s nvidia-smi | awk '/hashcat/{printf $2 \" \" $3 \"\\n\"}'"%nodes
@@ -101,10 +106,10 @@ def main():
 
 def  mon():
     while True:
-        if power_now() > maximum:
+        if power_now() > dangerp:
             gpus = [[i,get_hashcat_now(i)] for i in nodes]
             gpus.reverse()
-            while power_now() < maximum:
+            while power_now() > dangerp:
                 for i in gpus:
                     if i[1]:
                         kill_hashcat(i[0],i[1].pop())
