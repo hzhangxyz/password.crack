@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 # parameter
-dd = 100 # sum of var and threshold
-dg = 50  # dangerous gate
+dd = 100 # starter gate
+dg = 70  # dangerous gate
 totalpower = 3000
 nodes = ["node2", "node3"]
 md5 = {"node2":200, "node3":300}

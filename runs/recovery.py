@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import os
-nodes = ["node2","node3"]
 pool = os.path.join(os.environ["CLIENTDIR"],"pool")
 pools = filter(lambda x:x[:7]=='client_', os.listdir(pool))
 for i in pools:

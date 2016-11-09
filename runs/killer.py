@@ -1,17 +1,17 @@
 #!/usr/bin/env python
+VERYDANGER = 2950
+
 from socketIO_client import SocketIO, LoggingNamespace
 from subprocess import check_output
 from time import sleep
 from sys import argv, stdout
 import os
 
-m = "0"
+flag = len(argv) == 1
 
 def p(n):
     global m
     m = n
-
-flag = len(argv) == 1
 
 socketIO = SocketIO('localhost', 8800, LoggingNamespace)
 socketIO.on('power', p)
@@ -24,7 +24,7 @@ def power_now():
 def main():
     n = power_now()
     if flag:
-        if n > 2950:
+        if n > VERYDANGER:
             os.system("kill -2 `ps aux | grep auto.py | grep -v grep | awk '{printf $2}'`")
             os.system("kill -2 `ps aux | grep auto.py | grep -v grep | awk '{printf $2}'`")
             os.system("ssh node2 killall -9 hashcat &")
