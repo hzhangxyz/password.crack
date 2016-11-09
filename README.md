@@ -27,3 +27,10 @@ in dicts , f is some tools
 - Param and Source => env.conf killer.py starter.py
 - Dicts            => think and find, and f.py
 - program stable   => try except and test
+
+# About dictionary
+- Download as many dictionary as possible
+- Find some partterns represent password well
+- Seperate them and combine into proper size
+- Bayesian...
+- Maintain manually
