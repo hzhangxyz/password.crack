@@ -2,10 +2,10 @@
 - `start.sh`  : start server
 - `end.sh`    : end server
 - `resume.sh` : resume server
-- `auto.py`   : auto run client (WITH param)
-- `mon.py`    : monitor and kill when dangera, with a file in argv, it only output pdu (WITH param)
+- `starter.py`: auto run client
+- `killer.py` : monitor and kill when dangera, with a file in argv, it only output pdu
 - `alert.sh`  : killall hashcat and stop to generate new client
-- `env.conf`  : useful environment (WITH param, NEED source)
+- `env.conf`  : useful environment
 - `recov.py`  : recovery ans not reported
 
 # run a client(need a while)
