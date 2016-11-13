@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 VERYDANGER = 2950
-VERYDANGER = 1100
 
 from socketIO_client import SocketIO, LoggingNamespace
 from subprocess import check_output
