@@ -4,7 +4,7 @@
 dd = 300 # starter gate
 dg = 200  # dangerous gate
 totalpower = 3000
-nodes = ["node1", "node2", ]
+nodes = ["node3",]
 md5 = {"node1":200, "node2":200, "node3":200, "node4":200}
 bcr = {"node1":200, "node2":200, "node3":200, "node4":200}
 gpu_available = {"node1":[1,2,3,4,5], "node2":[1,2,3,4,5], "node3":[1,2,3,4], "node4":[1,2,3,4]}
@@ -42,27 +42,24 @@ def handler(signal_num,frame):
 # get PDU
 def p(n):
     global m
-    m = sum(n)
+    m = sum(n) if isinstance(n,list) else int(n)
 
 def power_now():
-    try:
-        global m
-        socketIO.wait(seconds=1)
-        print "POWER new", m
-        if m > dangerp:
-            gpus = [[i,get_hashcat_now(i)] for i in nodes]
-            gpus.reverse()
-            while m > dangerp:
-                for i in gpus:
-                    if i[1]:
-                        print "KILLING"
-                        kill_hashcat(i[0],i[1].pop())
-                        print "KILLED ONE in %s"%i[0]
-                        socketIO.wait(seconds=0.2)
-                        break
-        return m
-    except:
-        return totalpower
+    global m
+    socketIO.wait(seconds=1)
+    print "POWER new", m
+    if m > dangerp:
+        gpus = [[i,get_hashcat_now(i)] for i in nodes]
+        gpus.reverse()
+        while m > dangerp:
+            for i in gpus:
+                if i[1]:
+                    print "KILLING"
+                    kill_hashcat(i[0],i[1].pop())
+                    print "KILLED ONE in %s"%i[0]
+                    socketIO.wait(seconds=0.2)
+                    break
+    return m
 
 # get hashcat
 def get_hashcat_now(node):
