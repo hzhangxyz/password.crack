@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 # parameter
-dd = 100 # starter gate
-dg = 70  # dangerous gate
+dd = 300 # starter gate
+dg = 200  # dangerous gate
 totalpower = 3000
-nodes = ["node2", "node3"]
-md5 = {"node2":200, "node3":300}
-bcr = {"node2":150, "node3":200}
-gpu_available = {"node2":[1,2,3,4,5,6,7,8], "node3":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]}
+nodes = ["node1", "node2", ]
+md5 = {"node1":200, "node2":200, "node3":200, "node4":200}
+bcr = {"node1":200, "node2":200, "node3":200, "node4":200}
+gpu_available = {"node1":[1,2,3,4,5], "node2":[1,2,3,4,5], "node3":[1,2,3,4], "node4":[1,2,3,4]}
 sec = 5
 runed = 25
 hash_type = "m"
@@ -36,18 +36,33 @@ def handler(signal_num,frame):
     except:
         for i in nodes:
             os.system("ssh %s killall -9 hashcat &"%i)
+        exit()
     exit()
 
 # get PDU
 def p(n):
     global m
-    m = 22.5*float(n)
+    m = sum(n)
 
 def power_now():
-    global m
-    socketIO.wait(seconds=1)
-    print "POWER new", m
-    return int(m)
+    try:
+        global m
+        socketIO.wait(seconds=1)
+        print "POWER new", m
+        if m > dangerp:
+            gpus = [[i,get_hashcat_now(i)] for i in nodes]
+            gpus.reverse()
+            while m > dangerp:
+                for i in gpus:
+                    if i[1]:
+                        print "KILLING"
+                        kill_hashcat(i[0],i[1].pop())
+                        print "KILLED ONE in %s"%i[0]
+                        socketIO.wait(seconds=0.2)
+                        break
+        return m
+    except:
+        return totalpower
 
 # get hashcat
 def get_hashcat_now(node):
@@ -104,26 +119,9 @@ def main():
             else:
                 print "NO more power for",hash_type,"of",i,":",times[i]
 
-def  mon():
-    while True:
-        if power_now() > dangerp:
-            gpus = [[i,get_hashcat_now(i)] for i in nodes]
-            gpus.reverse()
-            while power_now() > dangerp:
-                for i in gpus:
-                    if i[1]:
-                        kill_hashcat(i[0],i[1].pop())
-                        break
-            continue
-
 if __name__=="__main__":
     global sockerIO
     socketIO = SocketIO('localhost', 8800, LoggingNamespace)
     socketIO.on('power', p)
     signal.signal(signal.SIGINT, handler)
-    t1 = threading.Thread(target=main)
-    t2 = threading.Thread(target=mon)
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
+    main()
