@@ -29,6 +29,7 @@ in dicts , f is some tools
 - Param and Source => env.conf killer.py starter.py
 - Dicts            => think and find, and f.py
 - program stable   => try except and test
+- hashcat          => ask
 
 # About dictionary
 - Download as many dictionary as possible
