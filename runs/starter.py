@@ -4,7 +4,7 @@
 dd = 300 # starter gate
 dg = 200  # dangerous gate
 totalpower = 3000
-nodes = ["node3",]
+nodes = ["node1", "node2", "node3", "node4"]
 md5 = {"node1":200, "node2":200, "node3":200, "node4":200}
 bcr = {"node1":200, "node2":200, "node3":200, "node4":200}
 gpu_available = {"node1":[1,2,3,4,5], "node2":[1,2,3,4,5], "node3":[1,2,3,4], "node4":[1,2,3,4]}
