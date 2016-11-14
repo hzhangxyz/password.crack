@@ -35,5 +35,5 @@ in dicts , f is some tools
 - Download as many dictionary as possible
 - Find some partterns represent password well
 - Seperate them and combine into proper size
-- Bayesian...
+- From where, What kind, Bayesian...
 - Maintain manually
