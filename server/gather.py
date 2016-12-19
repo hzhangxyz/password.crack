@@ -20,7 +20,7 @@ else:
 hash_ans_l = hash_length + dict_length + 1
 
 def insert_single(ans_file,to_insert,start_id,end_id):
-    if len(to_insert) >= hash_length:
+    if len(to_insert) >= hash_ans_l:
         return
     ans_pointer = open(ans_file,"r+")
     ans_pointer.seek((1+hash_ans_l)*start_id)

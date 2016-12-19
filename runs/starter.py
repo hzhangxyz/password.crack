@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 # parameter
-dd = 300 # starter gate
-dg = 200  # dangerous gate
-totalpower = 3000
-nodes = ["node1", "node2", "node3", "node4"]
+dd = 200 # starter gate
+dg = 100  # dangerous gate
+totalpower = 1500
+nodes = ["node1", "node2"]
 md5 = {"node1":200, "node2":200, "node3":200, "node4":200}
 bcr = {"node1":200, "node2":200, "node3":200, "node4":200}
-gpu_available = {"node1":[1,2,3,4,5], "node2":[1,2,3,4,5], "node3":[1,2,3,4], "node4":[1,2,3,4]}
+gpu_available = {"node1":[1,2,3,4], "node2":[1,2,3,4], "node3":[1,2,3,4], "node4":[1,2,3,4]}
 sec = 5
 runed = 25
 hash_type = "m"
@@ -42,7 +42,7 @@ def handler(signal_num,frame):
 # get PDU
 def p(n):
     global m
-    m = sum(n) if isinstance(n,list) else int(n)
+    m = max(n) if isinstance(n,list) else int(n)
 
 def power_now():
     global m
@@ -116,9 +116,32 @@ def main():
             else:
                 print "NO more power for",hash_type,"of",i,":",times[i]
 
+n1l = [1,2,3,4]
+n2l = [1,2,3,4]
+ht = "m"
+
+import time
+def other_main():
+    while True:
+        print "SLEEP"
+        time.sleep(10)
+        n1 = get_hashcat_now("node1")
+        print "node1 :", n1
+        if len(n1) < len(n1l):
+            print "RUN in node1"
+            run_hashcat("node1",(set(n1l)-set(n1)).pop(),ht)
+            time.sleep(10)
+        n2 = get_hashcat_now("node2")
+        print "node2 :", n2
+        if len(n2) < len(n2l):
+            print "RUN in node2"
+            run_hashcat("node2",(set(n2l)-set(n2)).pop(),ht)
+            time.sleep(10)
+
 if __name__=="__main__":
     global sockerIO
     socketIO = SocketIO('localhost', 8800, LoggingNamespace)
     socketIO.on('power', p)
     signal.signal(signal.SIGINT, handler)
-    main()
+    #main()
+    other_main()

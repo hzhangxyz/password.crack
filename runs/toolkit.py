@@ -30,8 +30,10 @@ def spliter(inf,nums):
     for i,j in enumerate(d):
         writefile("%s.%d"%(inf,i),j)
 
-from re import match
-filt  = lambda x,y : filter(lambda z:match(x,z),y)
+import re
+def filt(x,y):
+    xx = re.compile(x)
+    return filter(xx.match,y)
 
 patterns = [
         "^[a-z]+$",
@@ -88,6 +90,7 @@ patterns = [
         "^[0-9]+[A-Z]{2}$",
 
 ]
+
 
 def ana(filename):
     print("[%s]"%filename)

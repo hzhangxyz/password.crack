@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-VERYDANGER = 2900
+VERYDANGER = 1500
 
 from socketIO_client import SocketIO, LoggingNamespace
 from subprocess import check_output
@@ -19,7 +19,7 @@ socketIO.on('power', p)
 def power_now():
     socketIO.wait(seconds=1)
     global m
-    return sum(m)
+    return max(m)
 
 def main():
     n = power_now()
